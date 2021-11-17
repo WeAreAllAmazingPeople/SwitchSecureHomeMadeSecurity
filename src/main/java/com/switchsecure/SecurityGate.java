@@ -6,8 +6,10 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -15,9 +17,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Component
+@RequestScope
 public class SecurityGate implements HandlerInterceptor {
     public static final String JWT_SECRET = "GoGoSwitchfully";
     Logger logger = LoggerFactory.getLogger(SecurityGate.class);
+
+    private final UserSecurityInformation userSecurityInformation;
+
+    public SecurityGate(@Qualifier("getUsernameAndRoleFromJWT")UserSecurityInformation userSecurityInformation) {
+        this.userSecurityInformation = userSecurityInformation;
+    }
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -40,6 +49,8 @@ public class SecurityGate implements HandlerInterceptor {
 
         // if JWT does NOT contain the correct role
         if(jwtMatchSecurityGuardRole(role, request)) {
+            userSecurityInformation.setRole(getRoleFromJwtToken(getJWT(request)));
+            userSecurityInformation.setName(getUserNameFromJwtToken(getJWT(request)));
             return true;
         } else {
             response.sendError(401);
@@ -70,7 +81,7 @@ public class SecurityGate implements HandlerInterceptor {
         String headerAuth = request.getHeader("Authorization");
 
         if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {
-            return headerAuth.substring(7, headerAuth.length());
+            return headerAuth.substring(7);
         }
 
         return null;
@@ -90,13 +101,13 @@ public class SecurityGate implements HandlerInterceptor {
         }
     }
 
-//    private String getUserNameFromJwtToken(String token) {
-//        return Jwts.parser()
-//                .setSigningKey(JWT_SECRET)
-//                .parseClaimsJws(token)
-//                .getBody()
-//                .getSubject();
-//    }
+    private String getUserNameFromJwtToken(String token) {
+        Algorithm algorithm = Algorithm.HMAC256(JWT_SECRET);
+        JWTVerifier verifier = JWT.require(algorithm)
+                .build();
+        DecodedJWT jwt = verifier.verify(token);
+        return jwt.getSubject();
+    }
 
     private String getRoleFromJwtToken(String token) {
         Algorithm algorithm = Algorithm.HMAC256(JWT_SECRET);

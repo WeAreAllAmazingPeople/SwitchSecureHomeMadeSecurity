@@ -1,6 +1,6 @@
 package com.switchsecure;
 
-import com.switchfully.homemadesecurity.ExampleController;
+import com.switchfully.homemadesecurity.example.ExampleController;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.servlet.MockMvc;
@@ -20,7 +20,7 @@ class SecurityGateAnonymousTest {
         // Given
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(new ExampleController())
                 .setControllerAdvice()
-                .addInterceptors(new SecurityGate())
+                .addInterceptors(new SecurityGate(new UserSecurityInformation()))
                 .build();
 
         // When
@@ -37,7 +37,7 @@ class SecurityGateAnonymousTest {
         // Given
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(new ExampleController())
                 .setControllerAdvice()
-                .addInterceptors(new SecurityGate())
+                .addInterceptors(new SecurityGate(new UserSecurityInformation()))
                 .build();
 
         // When
@@ -52,7 +52,7 @@ class SecurityGateAnonymousTest {
         // Given
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(new ExampleController())
                 .setControllerAdvice()
-                .addInterceptors(new SecurityGate())
+                .addInterceptors(new SecurityGate(new UserSecurityInformation()))
                 .build();
 
         // When
@@ -65,7 +65,7 @@ class SecurityGateAnonymousTest {
         // Given
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(new ExampleController())
                 .setControllerAdvice()
-                .addInterceptors(new SecurityGate())
+                .addInterceptors(new SecurityGate(new UserSecurityInformation()))
                 .build();
 
         // When
@@ -81,7 +81,7 @@ class SecurityGateAnonymousTest {
         // Given
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(new ExampleController())
                 .setControllerAdvice()
-                .addInterceptors(new SecurityGate())
+                .addInterceptors(new SecurityGate(new UserSecurityInformation()))
                 .build();
 
         // When
@@ -96,7 +96,7 @@ class SecurityGateAnonymousTest {
         // Given
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(new ExampleController())
                 .setControllerAdvice()
-                .addInterceptors(new SecurityGate())
+                .addInterceptors(new SecurityGate(new UserSecurityInformation()))
                 .build();
 
         // When
@@ -109,7 +109,7 @@ class SecurityGateAnonymousTest {
         // Given
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(new ExampleController())
                 .setControllerAdvice()
-                .addInterceptors(new SecurityGate())
+                .addInterceptors(new SecurityGate(new UserSecurityInformation()))
                 .build();
 
         // When

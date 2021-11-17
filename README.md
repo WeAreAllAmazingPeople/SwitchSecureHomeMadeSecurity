@@ -5,6 +5,29 @@ An extremely simple Security implementation for Switchfully students.
 - [x] Just add the `@SecurityGuard` annotation to your REST endpoints.
 - [x] Must use JWT tokens.
 
+## Upgrade to version 2
+![](swagger-authenticate.png)
+- New Features
+    - It now works with Swagger
+    - (Experimental) You can get the name of the 'SecurityUser'
+
+### How to migrate
+- Add the dependency for SpringDoc
+```
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.5.12</version>
+        </dependency>
+```
+- Copy the 4 java files (again) `SecurityGate`, `SecurityGuard`, `UserSecurityInformation` (new) & `VerySecureSecurityConfig`
+- (experimental feature) To extract the username from the JWT token, add the following to your Controllers (see ExampleController)
+```
+    @Autowired
+    @Qualifier("getUsernameAndRoleFromJWT")
+    UserSecurityInformation user;
+```
+
 ## How-to & example
 ```
 @GetMapping("/example/admin")
@@ -64,3 +87,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgS
     - the JWT token must be signed with `GoGoSwitchfully` using the HMAC256/HS256 algorithm.
     - `"role"` can have value `"ADMIN"` or `"CUSTOMER"`.
  - https://en.wikipedia.org/wiki/JSON_Web_Token
+
+## Notes
+The fact that this security library has a dependency on Swagger/SpringDoc ... well that is a big red flag!
+It works, but it is not perfect.
