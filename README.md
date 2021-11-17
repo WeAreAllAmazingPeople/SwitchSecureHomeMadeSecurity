@@ -84,9 +84,10 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgS
     "role": "CUSTOMER"
 }
 ```
-    - the JWT token must be signed with `GoGoSwitchfully` using the HMAC256/HS256 algorithm.
-    - `"role"` can have value `"ADMIN"` or `"CUSTOMER"`.
- - https://en.wikipedia.org/wiki/JSON_Web_Token
+- the JWT token must be signed with `GoGoSwitchfully` using the HMAC256/HS256 algorithm.
+- `"role"` can have value `"ADMIN"` or `"CUSTOMER"`.
+
+- https://en.wikipedia.org/wiki/JSON_Web_Token
 
 ## Notes
 The fact that this security library has a dependency on Swagger/SpringDoc ... well that is a big red flag!
