@@ -1,9 +1,16 @@
 # SwitchSecure Homemade Security
 
+:warning: For educational purposes only!
+
 ## Goal
 An extremely simple Security implementation for Switchfully students.
 - [x] Just add the `@SecurityGuard` annotation to your REST endpoints.
 - [x] Must use JWT tokens.
+
+## Example JWT tokens
+- https://jwt.io/#debugger-io?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJQYXJrc2hhcmsgU2VjdXJpdHkiLCJpYXQiOjE2MzcwNjEzMzMsImV4cCI6MTY2ODU5NzM0MSwiYXVkIjoiUGFya3NoYXJrIiwic3ViIjoiQ2hyaXN0b3BoIiwicm9sZSI6IkFETUlOIn0.K7am1USAj-OSdn9_Rnm-quXaLC3IxVSVvqya7KJllNo
+- https://jwt.io/#debugger-io?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJQYXJrc2hhcmsgU2VjdXJpdHkiLCJpYXQiOjE2MzcwNjEzMzMsImV4cCI6MTY2ODU5NzM0MSwiYXVkIjoiUGFya3NoYXJrIiwic3ViIjoiS2FyZWwiLCJyb2xlIjoiQ1VTVE9NRVIifQ.7zb7fasjMw9H0W3FJJyevEbYkejdwHwhaFJdNoeX0mw
+
 
 ## Upgrade to version 2
 ![](swagger-authenticate.png)
